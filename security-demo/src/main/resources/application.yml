@@ -6,9 +6,27 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/spring_security_mine?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
     username: root
     password: 111111
-  session:
-    store-type: none
+  #session:
+  #  store-type: redis
+
+cli:
   security:
-    user:
-      name: user
-      password: user
+    browser:
+      #是否覆盖跳转到的登录页
+      #loginPage: /demo-login.html
+      #登录成功后返回JSON还是跳转页面
+      loginType: REDIRECT
+    #code:
+      #image:
+        #length: 6
+        #width: 100
+    oauth2:
+      clients[0]:
+        clientId: dociee_app
+        clientSecret: $XWmdGxfXxFiaTu
+        accessTokenValidateSeconds: 7200
+      clients[1]:
+        clientId: dociee_web
+        clientSecret: $2a$10$XW8a2MX
+        accessTokenValidateSeconds: 7200
+      tokenStore: jwt

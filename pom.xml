@@ -8,23 +8,17 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <!-- 继承spring-boot-starter-parent -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.3.RELEASE</version>
-    </parent>
-
-    <!-- 指定版本 -->
     <dependencyManagement>
         <dependencies>
+            <!-- io.spring.platform解决了依赖之间版本兼容的问题，提供了一套可以使用的依赖版本 -->
             <dependency>
                 <groupId>io.spring.platform</groupId>
-                <artifactId>platform</artifactId>
-                <version>Brussels-SR4</version>
+                <artifactId>platform-bom</artifactId>
+                <version>Brussels-SR12</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- 同io.spring.platform，这个是spring cloud的一套依赖-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -34,14 +28,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!-- 声明子项目 -->
-    <modules>
-        <module>security-app</module>
-        <module>security-browser</module>
-        <module>security-core</module>
-        <module>security-demo</module>
-    </modules>
 
     <!-- 编译相关配置 -->
     <build>
@@ -58,4 +44,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- 声明子项目 -->
+    <modules>
+        <module>security-app</module>
+        <module>security-browser</module>
+        <module>security-core</module>
+        <module>security-demo</module>
+    </modules>
 </project>
