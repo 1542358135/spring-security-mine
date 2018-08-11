@@ -37,7 +37,6 @@ public class CliResourcesServerConfig extends ResourceServerConfigurerAdapter {
                 .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
                 .successHandler(cliSuccessHandler)
                 .failureHandler(cliFailureHandler);
-
         http.authorizeRequests()
                 .antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL).permitAll()                        //放行非法权限跳转的controller
                 .antMatchers("/code/image").permitAll()                                                         //放行的图片验证码
