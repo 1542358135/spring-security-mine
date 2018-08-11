@@ -54,7 +54,6 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .and()
             .authorizeRequests()
                 .antMatchers("/require").permitAll()                        //放行非法权限跳转的controller
-                .antMatchers(securityProperties.getBrowser().getLoginPage()).permitAll() //放行登录页面
                 .antMatchers("/code/image").permitAll()                        //放行的图片验证码
                 .anyRequest().authenticated()                               //所有请求都要身份验证
                 .and()

@@ -6,6 +6,5 @@ package com.cli.security.app.properties;
  * @date 2018/6/13
  */
 public enum  LoginType {
-    REDIRECT,
     JSON
 }

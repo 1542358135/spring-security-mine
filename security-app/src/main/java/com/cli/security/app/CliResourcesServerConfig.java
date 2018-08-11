@@ -40,11 +40,10 @@ public class CliResourcesServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL).permitAll()                        //放行非法权限跳转的controller
-                .antMatchers(securityProperties.getBrowser().getLoginPage()).permitAll() //放行登录页面
-                .antMatchers("/code/image").permitAll()                        //放行的图片验证码
-                .anyRequest().authenticated()                               //所有请求都要身份验证
+                .antMatchers("/code/image").permitAll()                                                         //放行的图片验证码
+                .anyRequest().authenticated()                                                                   //所有请求都要身份验证
                 .and()
             .csrf()
-                .disable();                                              //跨站伪造防护，关闭
+                .disable();                                                                                     //跨站伪造防护，关闭
     }
 }

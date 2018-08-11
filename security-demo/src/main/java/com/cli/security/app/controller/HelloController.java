@@ -1,16 +1,20 @@
 package com.cli.security.app.controller;
 
 import com.cli.security.app.entity.User;
+import com.cli.security.app.properties.SecurityProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +29,20 @@ import java.util.List;
 @RequestMapping("/user")
 public class HelloController {
 
+    @Autowired
+    private SecurityProperties securityProperties;
+
     @GetMapping("/me")
-    public Object getCurrentUser(Authentication user) {
+    public Object getCurrentUser(Authentication user, HttpServletRequest request) throws UnsupportedEncodingException {
+        String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
+
+        Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))      //设置解析密码
+                .parseClaimsJws(token).getBody();                                                                             //解析
+
+        String company = (String) claims.get("company");
+
+        System.out.println(company);
+
         return user;
     }
 

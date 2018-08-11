@@ -43,7 +43,7 @@ public class BrowserSecurityController {
             String target = savedRequest.getRedirectUrl();
             logger.info("target:" + target);
             if(StringUtils.endsWithIgnoreCase(target, ".html")){
-                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
+                /*redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());*/
             }
         }
         return "需要身份验证！";

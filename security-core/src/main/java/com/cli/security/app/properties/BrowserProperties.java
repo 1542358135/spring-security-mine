@@ -7,10 +7,6 @@ package com.cli.security.app.properties;
  */
 public class BrowserProperties {
     /**
-     * 非法访问接口，如果是html情况，则指定默认web端跳转页面
-     */
-    private String loginPage = "/default-browser-login.html";
-    /**
      * 指定默认登录成功返回Json还是页面
      */
     private LoginType loginType = LoginType.JSON;
@@ -18,14 +14,6 @@ public class BrowserProperties {
      * 指定默认rememberMe Token的过期时间
      */
     private int rememberMeSeconds = 3600;
-
-    public String getLoginPage() {
-        return loginPage;
-    }
-
-    public void setLoginPage(String loginPage) {
-        this.loginPage = loginPage;
-    }
 
     public LoginType getLoginType() {
         return loginType;

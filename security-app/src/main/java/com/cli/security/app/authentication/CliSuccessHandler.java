@@ -1,11 +1,7 @@
 package com.cli.security.app.authentication;
 
-import com.cli.security.app.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.MapUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -21,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.HashMap;
 
 /**
  * 设置验证成功后的请求
@@ -39,6 +36,14 @@ public class CliSuccessHandler extends SavedRequestAwareAuthenticationSuccessHan
 	@Autowired
 	private AuthorizationServerTokenServices authorizationServerTokenServices;
 
+	/**
+	 * 生成token并返回
+	 * @param request request
+	 * @param response response
+	 * @param authentication 身份信息
+	 * @throws IOException IOException
+	 * @throws ServletException ServletException
+	 */
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -68,7 +73,7 @@ public class CliSuccessHandler extends SavedRequestAwareAuthenticationSuccessHan
 		}
 
 		/* 获取TokenRequest */
-		TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(), "custom");
+		TokenRequest tokenRequest = new TokenRequest(new HashMap<>(0), clientId, clientDetails.getScope(), "custom");
 
 		/* 获取Token */
 		OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
